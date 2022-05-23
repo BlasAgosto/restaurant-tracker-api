@@ -1,12 +1,13 @@
-#!/bin/sh
+#!/bin/bash
 TOKEN="13881640d8cc70f7ce0de723d3cc39b2"
-_ID=_id"628bf04b6016fe78b5c5a825"
-API="http://localhost:4741"
-URL_PATH="/examples"
+ID="628bfbd0f88dc07cdd648fe1"
 
-curl "${API}${URL_PATH}" \
+API="http://localhost:4741"
+URL_PATH="/add-rests"
+
+curl "${API}${URL_PATH}/${ID}" \
   --include \
-  --request GET \
+  --request DELETE \
   --header "Authorization: Bearer ${TOKEN}"
 
 echo
