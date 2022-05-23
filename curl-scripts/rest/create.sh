@@ -1,11 +1,11 @@
 #!/bin/bash
 
-TEXT="123"
-TITLE="SF"
-TOKEN="1e03e865761ef14628fc37811b406539"
+NAME="Applebees"
+THOUGHTS="Food is dog but worse"
+TOKEN="13881640d8cc70f7ce0de723d3cc39b2"
 
 API="http://localhost:4741"
-URL_PATH="/examples"
+URL_PATH="/add-rests"
 
 curl "${API}${URL_PATH}" \
   --include \
@@ -13,9 +13,9 @@ curl "${API}${URL_PATH}" \
   --header "Content-Type: application/json" \
   --header "Authorization: Bearer ${TOKEN}" \
   --data '{
-    "example": {
-      "text": "'"${TEXT}"'",
-      "title": "'"${TITLE}"'"
+    "restaurant": {
+      "name": "'"${NAME}"'",
+      "thoughts": "'"${THOUGHTS}"'"
     }
   }'
 
