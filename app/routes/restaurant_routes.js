@@ -76,7 +76,7 @@ router.get('/add-rests/:id', requireToken, (req, res, next) => {
 // ========================================[[ D E L E T E ]]===================================================//
 // ========================================================================================================//
 // Destroy: DELETE /events/:id delete the event
-router.delete('/add-rests/:id', requireToken, (req, res, next) => {
+router.delete('/your-rests/:id', requireToken, (req, res, next) => {
   const id = req.params.id
   Restaurant.findById(id)
   // handle 404 error if no event found
@@ -95,29 +95,42 @@ router.delete('/add-rests/:id', requireToken, (req, res, next) => {
 // ========================================================================================================//
 // ========================================[[ U P D A T E ]]===================================================//
 // ========================================================================================================//
-// Update: PATCH /events/:id
-router.patch('/add-rests/:id', requireToken, (req, res, next) => {
-  // get id of event from params
-  const id = req.params.id
-  // get event data from request
-  const eventData = req.body.restaurant
-  // fetching event by its id
-  Restaurant.findById(id)
-  // handle 404 error if no event found
+module.exports = router
+router.patch('/your-rests/:id', requireToken, (req, res, next) => {
+  delete req.body.updateData.owner
+
+  Restaurant.findById(req.params.id)
     .then(handle404)
-    .then((restaurant) => requireOwnership(req, restaurant))
-  // update event
     .then((restaurant) => {
-      // updating event object
-      // with eventData
-      Object.assign(restaurant, eventData)
-      // save event to mongodb
-      return restaurant.save()
+      requireOwnership(req, restaurant)
+
+      return restaurant.updateOne(req.body.updateData)
     })
-  // if successful return 204
     .then(() => res.sendStatus(204))
-  // on error go to next middleware
     .catch(next)
 })
 
-module.exports = router
+// // Update: PATCH /events/:id
+// router.patch('/your-rests/:id', requireToken, (req, res, next) => {
+//   // get id of event from params
+//   const id = req.params.id
+//   // get event data from request
+//   const eventData = req.body.restaurant
+//   // fetching event by its id
+//   Restaurant.findById(id)
+//   // handle 404 error if no event found
+//     .then(handle404)
+//     .then((restaurant) => requireOwnership(req, restaurant))
+//   // update event
+//     .then((restaurant) => {
+//       // updating event object
+//       // with eventData
+//       Object.assign(restaurant, eventData)
+//       // save event to mongodb
+//       return restaurant.save()
+//     })
+//   // if successful return 204
+//     .then(() => res.sendStatus(204))
+//   // on error go to next middleware
+//     .catch(next)
+// })
