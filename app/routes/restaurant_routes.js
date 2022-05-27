@@ -110,6 +110,22 @@ router.patch('/your-rests/:id', requireToken, (req, res, next) => {
     .catch(next)
 })
 
+// ========================================================================================================//
+// ========================================[[ S U P E R I N D E X  ]]===================================================//
+// ========================================================================================================//
+
+// Index: GET /events return all the events
+router.get('/all-rests', requireToken, (req, res, next) => {
+  // fetch all the events from mongodb
+  Restaurant.find()
+  // use mongoose toObject on each event to include virtuals
+    .then((restaurant) => restaurant.map((restaurant) => restaurant.toObject()))
+  // send response 200 with events to client
+    .then((restaurant) => res.json({ restaurant: restaurant }))
+  // on error run next middleware
+    .catch(next)
+})
+
 // // Update: PATCH /events/:id
 // router.patch('/your-rests/:id', requireToken, (req, res, next) => {
 //   // get id of event from params
