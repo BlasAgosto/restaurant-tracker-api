@@ -1,10 +1,10 @@
-# Image Upload App
+# Restaurant Tracker App
 
 This is the frontend repo for our full stack image upload application. This app uses MongoDB as a database and integrates AWS for image storage, allowing users to upload photos with additional information and then access those photos from their thumbnails.
 
 ## Links 
 - [Deployed App](https://glacial-atoll-96940.herokuapp.com/)
-- [Backend Repo](https://github.com/BlasAgosto/restaurant-tracker-api)
+- [Frontend Repo](https://github.com/BlasAgosto/restaurant-tracker-client)
 
 ### Technologies Used
 
@@ -18,12 +18,33 @@ Backend:
 - MongoDB
 - Mongoose
 
+## API
+
+### Authentication
+
+| HTTP Method | URL Path      | Action |
+|--------|--------------------|-------------|
+| POST   | `/sign-up`          | sign-up    |
+| POST   | `/sign-in`          | sign-in    |
+| PATCH  | `/change-password/` | change password  |
+| DELETE | `/sign-out/`        | sign-out   |
+
+### Restaurant Tracking
+
+| HTTP Method   | URL Path        | Action |
+|--------|------------------------|-------------------|
+| POST   | `/add-rests`             | creates a restaurant |
+| GET   | `/your-rests`             | shows all created restaurants from signed in user   |
+| GET   | `/`             | shows all created restaurants from all users    |
+| PATCH  | `/your-rests` | updates restaurant details  |
+| DELETE | `/your-rests`        | deletes created restaurant   |
+
 ## Planning
 
-In preparation for work on this app, our team planned out wireframes, entity relationship diagrams, and user stories which can be found below.
+In preparation for work on this app, our team planned out wire-frames, entity relationship diagrams, and user stories which can be found below.
 
-### Wireframe
-![Image Upload App Wireframe](https://i.imgur.com/yaCjVyY.png "Image Upload App Wireframe")
+### Wire-frame
+![Image Upload App Wire-frame](https://i.imgur.com/yaCjVyY.png "Image Upload App Wire-frame")
 
 ### Entity Relationship Diagram (ERD)
 ![Image Upload App ERD](https://i.imgur.com/vlAC77B.png "Image Upload App ERD")
